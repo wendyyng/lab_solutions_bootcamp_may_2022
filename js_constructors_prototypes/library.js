@@ -22,6 +22,11 @@ class Library {
 
   shelve(book) {
     this.books.push(book);
+
+    this.books.sort(function (a, b) {
+      return a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
+    });
+
     return this; // returning `this` makes shelve method chainable
   }
 
@@ -41,8 +46,8 @@ class Library {
 }
 
 const lib = new Library();
-lib.shelve(eloquentJS).shelve(speakingJS).shelve(theRustProgLang);
+lib.shelve(theRustProgLang).shelve(speakingJS).shelve(eloquentJS);
 
-lib.list();
+console.log(lib.list());
 
 lib.findByTitle("javascript"); // this will return both javascript books
