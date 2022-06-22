@@ -1,0 +1,14 @@
+<%- include('./partials/header') %>
+<h1>Directory Lister</h1>
+<ul>
+  . <% if(files){ %> <%files.forEach((file, index)=>{%> <% let displayName =
+  file; if (file.split('.').length === 1) {displayName += "/"}
+  if(index===files.length-1){%>
+  <div>└── <%= displayName %></div>
+  <% }%>
+
+  <div>├──<%=displayName%></div>
+  <%} )%> <%}%>
+</ul>
+
+<%- include('./partials/footer') %>

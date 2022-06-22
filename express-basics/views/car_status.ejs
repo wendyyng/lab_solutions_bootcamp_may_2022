@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Car Status</title>
-  </head>
-  <body>
-    <h1>Car Status!</h1>
-    <% if (age) { %>
-    <h3>Your car is <%= age %></h3>
+<%- include('./partials/header') %>
+<h1>Car Status</h1>
+<% if (age) { %> Your car is <%= age %><% } %>
+<form action="/car_status">
+  <label for="year">Enter the year of your vehicle:</label>
+
+  <select name="year">
+    <% for (let i = 2025; i >= 1950; i--) { %>
+    <option value="<%= i %>"><%= i %></option>
     <% } %>
-    <form class="" action="/car_status">
-      <label for="year">Year of Car</label>
-      <select class="" name="year">
-        <% for (let i = 2025; i > 1949; i--) { %>
-        <option value="<%= i %>"><%= i %></option>
-        <% } %>
-      </select>
-      <input type="submit" name="" value="Submit" />
-    </form>
-  </body>
-</html>
+  </select>
+  <button type="submit">Submit</button>
+</form>
+<%- include('./partials/footer') %>
