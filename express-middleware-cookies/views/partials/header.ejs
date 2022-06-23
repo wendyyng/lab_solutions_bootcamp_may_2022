@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      |
+      <a href="/preferred_language">Preferred Language</a>
+      |
+      <a href="/tasks">Tasks</a>
+      |
+      <a href="/tasks/new">New Task</a>
+      |
+      <% if(username) {%>
+        <span> 👩‍💻 <%=username%> </span>
+        <form action="/sign_out" method="POST">
+          <button type="sign-out">Sign Out</button>
+        
+          <%} else {%>
+          <form action="/sign_in" method="POST">
+            <input name="username" placeholder="Username" />
+            <button type="submit">Sign In</button>
+          </form>
+          <%}%>
+    </nav>
+  </body>
+</html>
