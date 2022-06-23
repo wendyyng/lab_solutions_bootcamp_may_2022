@@ -7,7 +7,7 @@ const app = express();
 app.use(logger("dev"));
 app.set("view engine", "ejs");
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 const COOKIE_MAX_AGE = 1000 * 60 * 60 * 24 * 7;
 
 app.use(cookieParser());
