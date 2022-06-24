@@ -1,0 +1,27 @@
+{
+  "name": "knexpress_labs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon",
+    "db:create": "createdb --echo knexpress_labs",
+    "db:drop": "dropdb --echo knexpress_labs",
+    "db:migrate": "knex migrate:latest",
+    "db:reset": "npm run db:drop && npm run db:create && npm run db:migrate"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.8",
+    "knex": "^2.1.0",
+    "method-override": "^3.0.0",
+    "morgan": "^1.10.0",
+    "pg": "^8.7.3"
+  }
+}

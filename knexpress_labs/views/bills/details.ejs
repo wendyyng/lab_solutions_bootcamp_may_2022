@@ -1,0 +1,17 @@
+<%- include("../partials/header") %>
+
+<h1>Your Bill</h1>
+
+<h2>
+  <% if(bill && finalBill){ %>
+  <!-- billTotal, taxPercent, tipPercent and groupSize  -->
+  total: $<%= bill.bill_total %>
+  <br />
+  tax: <%= bill.tax_percent %>%
+  <br />
+  tip: <%= bill.tip_percent %>%
+  <br />
+  Number of people: <%= bill.group_size %>
+  <br />
+  Every person must pay $<%= finalBill%> <% } %>
+</h2>
