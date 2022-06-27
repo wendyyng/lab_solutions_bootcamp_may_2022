@@ -1,0 +1,31 @@
+<%- include('./partials/header') %>
+<h1>FizzBuzz</h1>
+<form>
+  <div>
+    <label for="number1">Number 1</label>
+    <input
+      type="number"
+      name="number1"
+      min="1"
+      max="100"
+      value="<%= number1 %>"
+    />
+  </div>
+  <div>
+    <label for="number2">Number 2</label>
+    <input
+      type="number"
+      name="number2"
+      min="1"
+      max="100"
+      value="<%= number2 %>"
+    />
+  </div>
+  <button type="submit">Submit</button>
+</form>
+<ul>
+  <% fizzBuzzArr.forEach(function (val) { %>
+  <li><%= val %></li>
+  <% }) %>
+</ul>
+<%- include('./partials/footer') %>

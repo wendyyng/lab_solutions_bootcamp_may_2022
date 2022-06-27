@@ -1,0 +1,24 @@
+<%- include("../partials/header") %>
+
+<h1>Add a New Bill</h1>
+<form action="/bills" method="post">
+  <div>
+    Amount
+    <input aria-label="number" type="number" name="billTotal" />
+  </div>
+  <div>
+    Tax
+    <input aria-label="number" type="number" name="taxPercent" />
+  </div>
+  <div>
+    Tip
+    <input aria-label="number" type="number" name="tipPercent" />
+  </div>
+  <div>
+    Number of People
+    <input aria-label="number" type="number" name="groupSize" />
+  </div>
+  <div>
+    <input type="submit" value="submit" />
+  </div>
+</form>

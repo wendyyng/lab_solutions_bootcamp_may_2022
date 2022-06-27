@@ -1,0 +1,16 @@
+<%- include("../partials/header") %>
+
+<h1>Bills</h1>
+
+<% bills.forEach((bill)=>{
+    %>
+    <div>
+        <a href='/bills/<%=bill.id%>'>Bill #<%= bill.id %></a>
+        Bill for <%=bill.group_size %> people.
+    </div>
+
+<%}) %>
+<br/>
+<div>
+    <a href='/bills/new'>Create new Bill</a>
+</div>
