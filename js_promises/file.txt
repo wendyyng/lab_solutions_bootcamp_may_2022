@@ -1,0 +1,128 @@
+function add(a, b = 0) {
+  return promiseMath(a, b, a + b);
+}
+
+function sub(a, b = 0) {
+  return promiseMath(a, b, a - b);
+}
+
+function mult(a, b = 1) {
+  return promiseMath(a, b, a * b);
+}
+
+function div(a, b = 1) {
+  return promiseMath(a, b, a / b);
+}
+
+function pow(a, b = 1) {
+  return promiseMath(a, b, Math.pow(a, b));
+}
+
+function promiseMath(a, b, value) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (isNaN(a) || isNaN(b)) {
+        reject("All parameters must be numbers");
+      }
+      resolve(value);
+    });
+  });
+}
+
+add(9)
+  .then((value) => add(9, value)) // value is 9
+
+  .then((value) => add(2, value)) // value is 18
+
+  .then((value) => mult(5, value)) // value is 20
+
+  .then((value) => div(value, 10)) // r is 100
+
+  .then(console.log); // logs 10
+
+The contents of my file2
+The contents of my file3
+const fs = require("fs");
+function readFile(filePath) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  });
+}
+function readdir(...args) {
+  return new Promise((resolve, reject) => {
+    fs.readdir(...args, (error, data) => {
+      if (error) return reject(err);
+      resolve(data);
+    });
+  });
+}
+function writeFile(filename, contents) {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(filename, contents, (err) => {
+      if (err) reject(err);
+      resolve();
+    });
+  });
+}
+const pathToDir = ".";
+
+readdir(pathToDir)
+  .then((fileNames) =>
+    Promise.all(
+      fileNames.map((fileName) => readFile(`${pathToDir}/${fileName}`, "utf8"))
+    )
+  )
+  .then((filesContents) => writeFile("file.txt", filesContents.join("\n")))
+  .then(() => console.log("Wrote to file: file.txt"))
+  .catch(console.error);
+
+const fs = require("fs");
+
+const readFile = (filePath) => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  });
+};
+
+readFile("file.txt")
+  .then((data) => console.log(data.toString()))
+  .catch((err) => console.log(err));
+
+const fs = require("fs");
+
+const readdir = (...args) => {
+  return new Promise((resolve, reject) => {
+    fs.readdir(...args, (error, data) => {
+      if (error) return reject(err);
+      resolve(data);
+    });
+  });
+};
+readdir(".")
+  .then((fileNames) => console.log(fileNames.join(", ")))
+  .catch(console.error);
+
+const fs = require("fs");
+
+function writeFile(filename, contents) {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(filename, contents, (err) => {
+      if (err) reject(err);
+      resolve();
+    });
+  });
+}
+
+writeFile("file.txt", "The contents of my file")
+  .then(function () {
+    console.log("File write complete!");
+  })
+  .catch(function (error) {
+    console.error(error);
+  });
