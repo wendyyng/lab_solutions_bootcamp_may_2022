@@ -3,4 +3,6 @@ def frequency_of_numbers(arr)
 end
 
 array = [1, 2, 3, 4, 4, 4, 2, 3, 3, 3]
+array1 = [1, 2, 6, 6, 6, 6, 6, 6, 3, 4, 4, 4, 2, 3, 3, 3]
 p frequency_of_numbers(array)
+p frequency_of_numbers(array1)
