@@ -1,6 +1,9 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,windows,macos,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,windows,macos,linux
+echo 'express-basics/node_modules/\n.DS_Store' > .gitignore
+echo 'express-middleware-cookies/node_modules/\n.DS_Store' > .gitignore
+echo 'knexpress_labs/node_modules/\n.DS_Store' > .gitignore
 
 ### Linux ###
 *~

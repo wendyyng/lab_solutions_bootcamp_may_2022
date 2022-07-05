@@ -107,6 +107,6 @@
     LIMIT 1);
 
   UPDATE products
-  SET price = price * 2
+  SET remaining_quantity = remaining_quantity * 2
   WHERE price = (SELECT MAX(price)
   FROM products);
