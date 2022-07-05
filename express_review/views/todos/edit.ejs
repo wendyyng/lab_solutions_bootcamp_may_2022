@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+<h1>Edit Todo</h1>
+    <form action="/todos/<%= todo.id%>" method="POST">
+        <!-- rename(override) this POST request to a PATCH request  -->
+        <input type="hidden" name="_method" value="PATCH">
+        <input type="text" name="title" value="<%= todo.title %>" >
+        <input type="text" name="imageUrl" value="<%= todo.imageUrl %>">
+        <textarea name="content" id="" cols="30" rows="10">
+            <%= todo.content %>
+        </textarea>
+        <input type="submit" value="Edit">
+    </form> 
+<%- include('../partials/footer') %>

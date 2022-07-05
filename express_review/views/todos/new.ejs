@@ -1,0 +1,18 @@
+<%- include('../partials/header') %>
+    <h1>New Todo</h1>
+    <form action="/todos" method="POST">
+        <div>
+            <input  class="form-control m-2" type="text" name="title" id="" placeholder="input a title">
+        </div>
+        <div>
+            <input class="form-control m-2" type="url" name="imageUrl" id="" placeholder="put a image url here">
+        </div>
+        <div>
+            <textarea class="form-control m-2" name="content" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div>
+            <input type="submit" value="Submit">
+        </div>
+
+    </form>
+    <%- include('../partials/footer') %>

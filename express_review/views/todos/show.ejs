@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+<h1>Show Page</h1>
+
+<h3><%= todo.title  %></h3>
+
+<p>
+    <%= todo.content %> 
+</p>
+
+<img src='<%= todo.imageUrl %> ' alt="todo item image" srcset="">
+
+<form action="/todos/<%= todo.id%>" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete">
+</form>
+
+<br>
+<a href="/todos/<%- todo.id%>/edit">
+    Edit
+</a>
+
+<%- include('../partials/footer') %>
+

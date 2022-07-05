@@ -1,0 +1,11 @@
+<%- include('./partials/header') %>
+    <h1>Todo List</h1>
+    <ul>
+        <% todos.forEach(todo => { %>
+            <li>
+                <%- `${todo.title} - ${todo.content}` %>
+            </li>
+        <% }); %>
+    </ul>
+<%- include('./partials/footer') %>
+
