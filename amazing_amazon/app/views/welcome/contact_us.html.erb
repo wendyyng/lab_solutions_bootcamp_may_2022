@@ -1,6 +1,6 @@
 <%= render "shared/navbar" %>
 <h1>Contact Us</h1> 
-<%= form_with url: "/thank_you", local: true do |form| %>
+<%= form_with url: "/thank_you", method: :get do |form| %>
 <%= form.label :name %>
 <%= form.text_field :name %>
 <%= form.label :email %>
