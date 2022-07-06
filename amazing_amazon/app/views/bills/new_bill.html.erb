@@ -1,12 +1,12 @@
 <h1>Bill Splitter</h1>
-<%= form_with url: "/split_bill", method: :post do |form| %>
-<%= form.label :amount %>
-<%= form.number_field :amount, min: 0, step: :any %>
-<%= form.label :tax %>
-<%= form.number_field :tax %>
-<%= form.label :tip %>
-<%= form.number_field :tip %>
-<%= form.label :number_of_guests %>
-<% form.number_field :number_of_guests %>
-<%= form.submit "Calculate" %>
+<%= form_tag split_bill_path do %>
+<%= label_tag :amount %>
+<%= number_field_tag :amount, @amount %>
+<%= label_tag :tax %>
+<%= number_field_tag :tax, @tax %>
+<%= label_tag :tip %>
+<%= number_field_tag :tip, @tip %>
+<%= label_tag :number_of_guests %>
+<%= number_field_tag :number_of_guests, @number_of_guests %>
+<%= submit_tag "Calculate" %>
 <% end %>

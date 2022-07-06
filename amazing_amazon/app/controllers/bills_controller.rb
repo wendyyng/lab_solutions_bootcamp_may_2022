@@ -3,5 +3,6 @@ class BillsController < ApplicationController
   end
 
   def split_bill
+    p params
   end
 end
