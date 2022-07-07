@@ -7,6 +7,5 @@ Rails.application.routes.draw do
   get "/about" => "welcome#about"
   get "/contact_us" => "welcome#contact_us"
   get "/thank_you" => "welcome#thank_you"
-  get "/new_bill" => "bills#new_bill"
-  post "/split_bill" => "bills#split_bill"
+  get "/new" => "bills#new"
 end
