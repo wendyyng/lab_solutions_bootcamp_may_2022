@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+# Product.destroy_all()
+40.times do
+  Product.create({
+    title: Faker::Commerce.product_name,
+    description: Faker::Commerce.color,
+    price: Faker::Commerce.price,
+
+  })
+end
+products = Product.all
+p "created #{products.count} products"
