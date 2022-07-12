@@ -1,0 +1,21 @@
+<%= render "shared/navbar" %>
+
+<%= form_with model: @product, local: true do |f| %>
+  <div >
+    <%= f.label :title %>
+    <%= f.text_field(:title, placeholder: "Product Name") %>
+  </div>
+  <div >
+    <%= f.label :description %>
+    <%= f.text_area(:description, cols: 50, rows: 5, placeholder: "Provide Description") %>
+  </div>
+  <div >
+    <%= f.label :price %>
+    <%= f.number_field(:price, min: 0, placeholder: "Enter Price", step: :any) %>
+  </div>
+<% if @product.new_record? %>
+    <%= f.submit("Create") %>
+  <% else %>
+    <%= f.submit("Update") %>
+  <% end %>
+<% end %>
