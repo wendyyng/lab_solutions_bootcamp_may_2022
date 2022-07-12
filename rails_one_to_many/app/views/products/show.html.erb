@@ -1,0 +1,49 @@
+<h1><%= @product.title%> </h1>
+<p><%= @product.description%></p>
+<small>$<%= format("%.2f",@product.price)%></small>
+<div>
+
+<small>
+    <%= link_to("Delete", product_path ,method: :delete, data:{confirm:"Are you sure?"}) %>
+</small>
+<small>
+    <%= link_to("Edit", edit_product_path(@product.id)) %>
+</small>
+</div> 
+
+<h3>
+Reviews
+</h3>
+
+<ul>
+    <% @reviews.each do |review| %>
+        <li>
+            <%= review.body %>
+            <%= review.rating %>
+            <small>
+            <%= button_to("Delete", product_review_path(@product.id, review.id) ,method: :delete, data:{confirm:"Are you sure?"}) %>
+            </small>
+        </li>
+    <% end %>
+</ul>
+
+<h4>Write your review</h4>
+
+<ul>
+<% if @review.errors.any? %>
+    <% @review.errors.full_messages.each do |msg|%>
+    <li><%= msg %></li>
+    <% end %>
+<% end %>
+</ul>
+<%= form_with(model: [@product, @review]) do |form|%>
+<div>
+    <%= form.label :body%>
+    <%= form.text_area :body%>
+</div>
+<div>
+    <%= form.label :rating%>
+    <%= form.number_field :rating%> <span>Rating should be from 1 to 5<span>
+</div>
+<%= form.submit %>
+<% end %>
