@@ -9,7 +9,7 @@
 40.times do
   Product.create({
     title: Faker::Commerce.product_name,
-    description: Faker::Commerce.color,
+    description: Faker::Hipster.sentence,
     price: Faker::Commerce.price,
 
   })

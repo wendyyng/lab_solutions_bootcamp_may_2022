@@ -13,9 +13,6 @@
     <%= f.label :price %>
     <%= f.number_field(:price, min: 0, placeholder: "Enter Price", step: :any) %>
   </div>
-<% if @product.new_record? %>
-    <%= f.submit("Create") %>
-  <% else %>
-    <%= f.submit("Update") %>
-  <% end %>
+    
+    <%= f.submit %>
 <% end %>
