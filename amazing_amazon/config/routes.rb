@@ -8,5 +8,10 @@ Rails.application.routes.draw do
   get "/contact_us" => "welcome#contact_us"
   get "/thank_you" => "welcome#thank_you"
   get "/new" => "bills#new"
-  resources :products
+  resource :session, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create, :show]
+
+  resources :products do
+    resources :reviews, only: [:create, :destroy]
+  end
 end

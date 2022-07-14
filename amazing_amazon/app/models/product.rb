@@ -8,6 +8,8 @@ class Product < ApplicationRecord
   DEFAULT_PRICE = 1
   scope :search, ->(query) { where("title ILIKE ? OR  description ILIKE ?", "%#{query}%", "%#{query}%") }
   validates_exclusion_of :title, in: %w( apple microsoft sony ), message: "please use a different title"
+  belongs_to :user
+  has_many :reviews, -> { order("updated_at DESC") }, dependent: :destroy
 
   private
 
