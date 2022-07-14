@@ -6,9 +6,8 @@ class Dog
   end
 
   def give_bone(size)
-    "I have too many bones!" if bones.count > 3
-    bones.push(size)
-    bones.length
+    @bones << size if @bones.length < 3
+    @bones.length
   end
 
   def eat_bone
