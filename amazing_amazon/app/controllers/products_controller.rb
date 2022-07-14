@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-
   before_action :load_product, except: [:create, :index]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
 
   def index
     @products = Product.order(created_at: :DESC)
@@ -46,6 +46,13 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:title, :description, :price)
+  end
+
+  def authorize_user!
+    unless can? :crud, @product
+      flash[:danger] = "Access Denied"
+      redirect_to root_path
+    end
   end
 
   def load_product

@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   get "/contact_us" => "welcome#contact_us"
   get "/thank_you" => "welcome#thank_you"
   get "/new" => "bills#new"
+  namespace :admin do
+    resources :dashboard, only: [:index]
+  end
   resource :session, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :show]
 
