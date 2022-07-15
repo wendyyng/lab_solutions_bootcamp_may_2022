@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   resources :products do
     resources :reviews, only: [:create, :destroy]
   end
+  resources :news_articles
 end
