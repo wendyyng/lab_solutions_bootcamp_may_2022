@@ -1,71 +1,59 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe NewsArticle, type: :model do
-  def news_article
-    @news_article ||= NewsArticle.new(
-      title: "Random Title",
-      description: "This is a really good article",
-    )
-  end
+  describe "validates" do
+    describe "title" do
+      it "should have a title" do
+        na = FactoryBot.build(:news_article,title:nil)
+        na.valid?
+        expect(na.errors.messages).to(have_key(:title)) 
+      end
+      it "title should be unique" do
+        persisted_na = FactoryBot.create(:news_article, title: "AAA", description:"A")
+        na = FactoryBot.build(:news_article, title: persisted_na.title)
+        na.valid?
+        expect(na.errors.messages).to(have_key(:title)) 
+      end
 
-  describe "validations" do
-    it "has a title" do
-      n = news_article
-      n.title = nil
-      n.valid?
-      expect(n.errors).to have_key(:title)
+    end
+    describe "description" do
+      it "should have description" do
+        na = FactoryBot.build(:news_article, description:nil)
+        na.valid?
+        expect(na.errors.messages).to(have_key(:description)) 
+      end
+
     end
 
-    it "has a unique title" do
-      n = news_article
-      n.save
-      n2 = NewsArticle.new(title: "Random Title")
-      n2.valid?
-      expect(n2.errors).to have_key(:title)
+    describe "published_at" do
+      it "published at should later than created at" do
+        na = FactoryBot.build(:news_article, created_at:Time.now, published_at: Time.now - 100)
+        na.valid?
+        expect(na.errors.messages).to(have_key(:published_at)) 
+      end
+
     end
 
-    it "has a description" do
-      n = news_article
-      n.description = nil
-      n.valid?
-      expect(n.errors).to have_key(:description)
+    describe "titleized" do
+      it "should save with a title in titlecase" do
+        na = FactoryBot.create(:news_article, title:"this is a title")
+        expect(na.title).to(eq "This Is A Title")
+      end
+
     end
 
-    it "ensures the published_at is after created_at" do
-      n = news_article
-      n.save
-      n.published_at = n.created_at
-      n.valid?
-      expect(n.errors).to have_key(:published_at)
-    end
-  end
 
-  describe "#titleize_title" do
-    it "titleizes the title" do
-      n = news_article
-      n.title = "a unique title"
-      n.save
-      expect(NewsArticle.last.title).to eq("A Unique Title")
-    end
-  end
+    describe "publish" do
+      it "should use current date as published_at when calling publish method" do
+        na = FactoryBot.build(:news_article, title:"something",description:"description")
 
-  describe "#publish" do
-    it "sets published_at to the current date" do
-      n = news_article
-      n.save
-      n.publish
-      expect(n.published_at.to_i).to eq(Time.zone.now.to_i)
-    end
-  end
+        na.set_publish_time
 
-  describe ".published" do
-    it "returns the published articles" do
-      n1 = NewsArticle.create(title: "article 1", description: "testing published")
-      n2 = NewsArticle.create(title: "article 2", description: "testing published")
-      n3 = NewsArticle.create(title: "article 3", description: "testing published")
-      n1.publish
-      n2.publish
-      expect([n1, n2]).to eq(NewsArticle.published)
+        expect(na.published_at.to_s).to(eq Time.now.utc.to_s) 
+
+      end
+
     end
+
   end
 end
