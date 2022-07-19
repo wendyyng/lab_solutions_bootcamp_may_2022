@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :products
-  has_many :reviews
+  has_many :products, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_secure_password
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :first_name, :last_name, presence: true
@@ -10,4 +10,11 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}".strip.titleize
   end
+
+  has_many :likes, dependent: :destroy
+  has_many :liked_reviews, through: :likes, source: :review
+
+  has_many :favourites
+  has_many :favourited_products, through: :favourites, source: :product
+
 end

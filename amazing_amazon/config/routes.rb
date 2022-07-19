@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show]
 
   resources :products do
-    resources :reviews, only: [:create, :destroy]
+    resources :reviews, only: [:create, :destroy] do
+      resources :likes, shallow: true, only: [:create, :destroy]
+    end
+    resources :favourites, shallow: true, only: [:create, :destroy]
   end
   resources :news_articles
 end

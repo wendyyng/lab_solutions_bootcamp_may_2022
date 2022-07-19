@@ -12,6 +12,12 @@
 <small>
     <%= link_to("Edit", edit_product_path(@product.id)) %>
 </small>
+<% favourite = @product.favourites.find_by(user: current_user) %>
+<% if favourite.present? %>
+    <%= button_to "Unfavourite", favourite_path(favourite), method: :delete %>
+<% else %>
+    <%= button_to "Favourite", product_favourites_path(@product), method: :post %>
+<% end%>
 </div> 
 
 <h3>
@@ -23,10 +29,21 @@ Reviews
         <li>
             <%= review.body %>
             <%= review.rating %>
-            reviewed by: <%= review.user.full_name %>
+            Reviewed by: <%= review.user.full_name %>
             
             <small>
+            <div>
+                Like:<%= review.likes.count() %>
+            </div>
             <%= button_to("Delete", product_review_path(@product.id, review.id), method: :delete, data: { confirm: "Are you sure?" }) %>
+            </small>
+            <small>
+                <% like = review.likes.find_by(user: current_user) %>
+                <% if like.present? %>
+                    <%= button_to "Unlike", like_path(like), method: :delete %>
+                <% elsif user_signed_in? %>
+                    <%= button_to "Like", product_review_likes_path(@product.id, review.id), method: :post %>
+                <% end%>
             </small>
         </li>
     <% end %>

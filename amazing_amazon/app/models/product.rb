@@ -11,6 +11,9 @@ class Product < ApplicationRecord
   belongs_to :user
   has_many :reviews, -> { order("updated_at DESC") }, dependent: :destroy
 
+  has_many :favourites, dependent: :destroy
+  has_many :favouriters, through: :favourites, source: :user  
+
   private
 
   def capitalize_title
