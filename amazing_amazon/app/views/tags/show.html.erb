@@ -1,0 +1,28 @@
+<div class='shadow-sm p-3 mb-5 bg-white rounded overflow-wrap'>
+  <div class='clearfix'>
+    <h1 class='float-left'>
+      The following products have the tag of <span class='badge badge-pill badge-info'>
+      <%= @tag.name %>
+      </span> 
+    </h1>
+    
+  </div>
+</div>
+<% @products.each do |product| %>
+ <div class='clearfix'>
+    <h1 class='float-left'>
+      <span class='badge badge-pill badge-info'>
+        <%= product.id %>
+      </span>
+<%= link_to product.title, product %>    </h1>
+    <h1 class='float-right text-center'>
+        <span class='badge badge-pill badge-success'><%= number_to_currency product.price %></span>
+    </h1>
+    
+  </div>
+  <small class='text-muted'>
+    sold by <em><%= product.user.full_name %></em>
+  <small>
+  <hr/>
+  <p class='shadow-none p-3 rounded'><%= product.description %></p>
+<% end %>

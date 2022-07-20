@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
   resource :session, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :show]
-
+  resources :tags, only: [:index, :show]
   resources :products do
     resources :reviews, only: [:create, :destroy] do
       resources :likes, shallow: true, only: [:create, :destroy]
