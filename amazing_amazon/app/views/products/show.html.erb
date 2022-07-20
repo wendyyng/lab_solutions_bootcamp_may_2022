@@ -66,8 +66,25 @@
                                                                                     data: { confirm: "Are you sure?" }) %>
 
     </h4>
-    <% # adding styles to .review-body inside of 'app/assets/stylesheets/reviews.scss'. Rails will automatically include stylesheets in controllers if the name of the stylesheet is the same name as the controller %>
     <p class='review-body text-muted'><%= review.body %></p>
+    
+  <% vote = review.votes.find_by(user: current_user) %>
+      <span class="vote-widget">
+        <% if vote.nil? %>
+          <%= button_to "vote up", product_review_votes_path(review_id: review.id, product_id: review.product.id, is_up: true), method: :post %>
+          <%= review.vote_total %> votes
+          <%= button_to "vote down", product_review_votes_path(review_id: review.id, product_id: review.product.id, is_up: false), method: :post %>
+        <% elsif vote.is_up? %>
+          <%= button_to "vote up", vote_path(vote), method: :delete, class: "active" %>
+          <%= review.vote_total %>
+          <%= button_to "vote down", vote_path(vote, is_up: false), method: :patch %>
+        <% else %>
+          <%= button_to "vote up", vote_path(vote, is_up: true), method: :patch %>
+          <%= review.vote_total %>
+          <%= button_to "vote down", vote_path(vote), method: :delete %>
+        <% end %>
+      </span>
+
     <p>
       <% if user_signed_in? && can?(:like, review) %>
           <% like = current_user.likes.find_by_review_id(review) %>
