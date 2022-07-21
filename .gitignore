@@ -19,7 +19,7 @@ echo 'knexpress_labs/node_modules/\n.DS_Store' > .gitignore
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
-
+/config/initializers/email_vars.rb
 ### macOS ###
 # General
 .DS_Store

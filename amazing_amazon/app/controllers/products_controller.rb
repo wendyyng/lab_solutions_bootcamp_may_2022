@@ -15,6 +15,8 @@ class ProductsController < ApplicationController
     @product.user = @current_user
 
     if @product.save
+      ProductMailer.delay(run_at: 5.minutes.from_now).notify_product_owner(@product)
+
       redirect_to product_path @product
     else
       render :new

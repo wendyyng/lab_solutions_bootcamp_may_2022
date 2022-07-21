@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   get "/contact_us" => "welcome#contact_us"
   get "/thank_you" => "welcome#thank_you"
   get "/new" => "bills#new"
+  match(
+    "/delayed_job",
+    to: DelayedJobWeb,
+    anchor: false,
+    via: [:get, :post],
+  )
   namespace :admin do
     resources :dashboard, only: [:index]
   end
