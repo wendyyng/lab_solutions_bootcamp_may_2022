@@ -23,6 +23,11 @@ super_user = User.create(
   })
 end
 users = User.all
+10.times do
+  Tag.create(name: Faker::Science.scientist)
+end
+
+tags = Tag.all
 40.times do
   p = Product.new({
     title: Faker::Commerce.product_name,
@@ -31,6 +36,8 @@ users = User.all
 
   })
   p.user = users.sample
+  p.tags = tags.shuffle.slice(0, rand(1..tags.count))
+
   p.save
   if p.valid?
     rand(1..5).times do
@@ -43,4 +50,4 @@ users = User.all
 end
 products = Product.all
 reviews = Review.all
-p "created #{products.count} products,#{reviews.count} reviews,  #{users.count} users"
+p "created #{products.count} products, #{reviews.count} reviews, #{tags.count} tags, #{users.count} users"

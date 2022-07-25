@@ -11,10 +11,11 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}".strip.titleize
   end
 
+  has_many :votes, dependent: :destroy
+  has_many :voted_reviews, through: :votes, source: :review
   has_many :likes, dependent: :destroy
   has_many :liked_reviews, through: :likes, source: :review
 
   has_many :favourites
   has_many :favourited_products, through: :favourites, source: :product
-
 end
