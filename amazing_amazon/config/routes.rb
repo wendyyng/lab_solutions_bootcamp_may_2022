@@ -28,4 +28,14 @@ Rails.application.routes.draw do
     resources :favourites, shallow: true, only: [:create, :destroy]
   end
   resources :news_articles
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :products
+      resource :session, only: [:create, :destroy]
+      get("/current_user", to: "sessions#get_current_user")
+      resources :users, only: [:create] do
+        get :current, on: :collection
+      end
+    end
+  end
 end
