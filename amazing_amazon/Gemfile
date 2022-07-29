@@ -65,7 +65,7 @@ gem 'pry-rails', '~> 0.3.9'
   gem "factory_bot_rails"
   gem 'rails-controller-testing'
   gem 'letter_opener'
-
+  gem 'rack-cors'
   gem "faker", "~> 2.11"
 end
 
