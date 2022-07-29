@@ -1,0 +1,10 @@
+
+      <% @tags.each do |tag| %>
+        <%= link_to tag do %>
+          <ul>
+            <p><span><%= tag.id %></span> <%= tag.name %></p>
+            
+            
+          </ul>
+        <% end %>
+      <% end %>

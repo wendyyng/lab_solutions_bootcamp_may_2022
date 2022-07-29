@@ -11,6 +11,21 @@ class Product < ApplicationRecord
   belongs_to :user
   has_many :reviews, -> { order("updated_at DESC") }, dependent: :destroy
 
+  has_many :favourites, dependent: :destroy
+  has_many :favouriters, through: :favourites, source: :user
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
+
+  def tag_names
+    self.tags.map(&:name).join(", ")
+  end
+
+  def tag_names=(rhs)
+    self.tags = rhs.strip.split(/\s*,\s*/).map do |tag_name|
+      Tag.find_or_initialize_by(name: tag_name)
+    end
+  end
+
   private
 
   def capitalize_title
