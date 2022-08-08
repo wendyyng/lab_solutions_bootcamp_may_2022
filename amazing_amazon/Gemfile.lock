@@ -124,6 +124,7 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jsonapi-renderer (0.2.2)
+    jwt (2.4.1)
     launchy (2.5.0)
       addressable (~> 2.7)
     letter_opener (1.8.1)
@@ -266,6 +267,8 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2022.1)
+      tzinfo (>= 1.0.0)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -298,6 +301,7 @@ DEPENDENCIES
   faker (~> 2.11)
   importmap-rails
   jbuilder
+  jwt
   letter_opener
   pg (~> 1.4, >= 1.4.1)
   pry (~> 0.14.1)

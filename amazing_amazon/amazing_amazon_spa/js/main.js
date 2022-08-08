@@ -1,4 +1,13 @@
-const baseURL = "http://localhost:3000/api/v1";
+const baseURL = "http://127.0.0.1:3000/api/v1";
+// TODO: To implement CORS authentication JWT token needs to be generated from token_controller by providing valid email and password
+// TODO: Then the token needs to be provided to header and validated.
+const JWT =
+	'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZmlyc3RfbmFtZSI6IkpvbiIsImxhc3RfbmFtZSI6IlNub3ciLCJmdWxsX25hbWUiOiJKb24gU25vdyIsImV4cCI6MTUyNDI0MjU2M30.COvnWFwszM7YiLflSu17eP7RwL3eJzey179cTHBPbx0';
+// Hacky way => without credential => user email
+  const userEmail = "1@1.com";
+// Password can also be added. handled from cookies with encrypt and decrypt
+// TODO: Password as been skipped for now
+
 const Product = {
   index() {
     return fetch(`${baseURL}/products`).then((response) => {
@@ -10,6 +19,19 @@ const Product = {
   show(id) {
     return fetch(`${baseURL}/products/${id}`).then((res) => res.json());
   },
+
+  create(productFormData) {
+		return fetch(`${baseURL}/products/`, {
+			// headers: {
+			// 	token: jwt
+			// },
+      // credentials: 'include',
+			method: 'POST',
+			body: productFormData
+		})
+			.then(res => res.json())
+			.catch(console.error);
+	}
 };
 
 function navigateTo(id) {
@@ -84,3 +106,39 @@ productsContainer.addEventListener("click", (event) => {
     renderProductShowPage(productId);
   }
 });
+
+const Session = {
+  create(params) {
+    // let formData = new URLSearchParams(Object.entries(params)).toString();
+    return fetch(`${baseURL}/session`, {
+      method: 'POST',
+      // credentials: 'include', //need this for cookies to be allowed to be sent
+      header: {
+        // 'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
+      // body: formData
+    })
+  }
+}
+
+// Session.create({
+//     email: '1@1.com',
+//     password: '123'
+// }).then(console.log('Signed in'))
+
+const newProductForm = document.querySelector('#new-product-form');
+newProductForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+		const formData = new FormData(event.currentTarget);
+    formData.append("userEmail", userEmail)
+		Product.create(formData).then(res => {
+      if(res && res.id) {
+        loadproducts();
+        renderProductShowPage(res.id);
+      } else {
+        alert("Something went wrong!")
+      }
+		});
+})
