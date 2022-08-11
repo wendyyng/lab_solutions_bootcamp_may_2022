@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import NewProductForm from "./NewProductForm";
-import ProductsData from "./ProductsData";
-const productsData = ProductsData();
+import { Product } from "../requests";
+import { Link } from "react-router-dom";
 export default class ProductsIndexPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { products: productsData };
+    this.state = { products: [], loading: true };
   }
-  createNewProduct(params) {
-    this.setState({
-      products: [params, ...this.state.products],
+  componentDidMount() {
+    Product.index().then((response) => {
+      this.setState({ products: response, loading: false });
     });
   }
+
   deleteProduct(id) {
     this.deleteProduct = this.deleteProduct.bind(this);
     const newProductData = this.state.products.filter(
@@ -22,22 +22,25 @@ export default class ProductsIndexPage extends Component {
   render() {
     return (
       <>
-        <NewProductForm
-          submitForm={(params) => this.createNewProduct(params)}
-        />
-
-        {this.state.products.map((product) => {
-          return (
-            <div key={product.id}>
-              <header>{product.title}</header>
-              <p>${product.price}</p>
-              <p>sold by {product.seller ? product.seller.full_name : ""}</p>
-              <button onClick={() => this.deleteProduct(product.id)}>
-                Delete
-              </button>
-            </div>
-          );
-        })}
+        {this.state.loading ? (
+          <div>products are loading</div>
+        ) : (
+          this.state.products.map((product) => {
+            return (
+              <li key={product.id}>
+                {product.id} -{" "}
+                <Link to={`/products/${product.id}`}>{product.title}</Link>{" "}
+                <button
+                  onClick={() => {
+                    this.deleteProduct(product.id);
+                  }}
+                >
+                  Delete
+                </button>{" "}
+              </li>
+            );
+          })
+        )}
       </>
     );
   }

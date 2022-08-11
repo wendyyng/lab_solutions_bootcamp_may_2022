@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import StarRating from "./StarRating";
 
 const ReviewDetails = (props) => {
-  const { body, rating, full_name } = props;
+  const { body, rating, reviewerName } = props;
   return (
     <div>
       <p>
         {body}
         <br />
-        By {full_name}
+        By {reviewerName}
       </p>
       <StarRating max={5} rating={rating} />
       <button onClick={props.deleteReview}>Delete</button>

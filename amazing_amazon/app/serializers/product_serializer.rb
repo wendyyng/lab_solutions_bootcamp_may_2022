@@ -17,9 +17,9 @@ class ProductSerializer < ActiveModel::Serializer
   has_many :reviews
 
   class ReviewSerializer < ActiveModel::Serializer
-  attributes(:id, :body, :rating)
+    attributes(:id, :body, :rating, :reviewer)
     belongs_to(:user, key: :reviewer)
-
+    
     def reviewer
       object.user&.full_name
     end
