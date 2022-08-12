@@ -3,7 +3,6 @@ const baseURL = "http://localhost:4000/api/v1";
 export const Product = {
   index() {
     return fetch(`${baseURL}/products`).then((response) => {
-      console.log(response);
       return response.json();
     });
   },
@@ -35,6 +34,26 @@ export const Product = {
       method: "DELETE",
       credentials: "include",
     });
+  },
+};
+export const User = {
+  current() {
+    return fetch(`${baseURL}/users/current`, {
+      credentials: "include",
+    }).then((res) => {
+      console.log(res);
+      res.json();
+    });
+  },
+  create(params) {
+    return fetch(`${baseURL}/users`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params),
+    }).then((res) => res.json());
   },
 };
 
