@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:4000/api/v1";
+const baseURL = process.env.REACT_APP_AMAZON_REQUEST_URL;
 
 export const Product = {
   index() {
@@ -36,13 +36,26 @@ export const Product = {
     });
   },
 };
+
+export const Review = {
+  create(params, userId) {
+    return fetch(`${baseURL}/users/${userId}/reviews`, {  ///api/v1/users/:user_id/reviews
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(params),
+    }).then((res) => res.json());
+  }
+}
+
 export const User = {
   current() {
     return fetch(`${baseURL}/users/current`, {
       credentials: "include",
     }).then((res) => {
-      console.log(res);
-      res.json();
+      return res.json();
     });
   },
   create(params) {

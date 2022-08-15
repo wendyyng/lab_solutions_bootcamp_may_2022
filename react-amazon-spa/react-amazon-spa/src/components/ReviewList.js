@@ -1,13 +1,20 @@
-import React from "react";
+import React, { Component } from "react";
 import ReviewDetails from "./ReviewDetails";
 
-const ReviewList = (props = {}) => {
-  const { reviews, onReviewDeleteClick = () => {} } = props;
+export default class ReviewList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      errors: []
+    };
+  }
 
-  return (
-    <div>
-      {reviews
-        ? reviews.map((review, i) => {
+  render() {
+    const { reviews } = this.props;
+    return (
+      <div>
+        {reviews
+          ? reviews.map((review, i) => {
             return (
               <ReviewDetails
                 key={i}
@@ -16,12 +23,40 @@ const ReviewList = (props = {}) => {
                 body={review.body}
                 reviewerName={review.reviewer}
                 createdAt={review.created_at}
-                deleteReview={() => props.deleteReview(review.id)}
+                deleteReview={() => this.props.deleteReview(review.id)}
               />
             );
           })
-        : ""}
-    </div>
-  );
-};
-export default ReviewList;
+          : ""}
+      </div>
+    )
+  }
+}
+
+// const ReviewList = (props = {}) => {
+//   const { reviews, onReviewDeleteClick = () => {} } = props;
+
+//   return (
+//     <div>
+//       <NewReviewForm
+
+//       />
+//       {reviews
+//         ? reviews.map((review, i) => {
+//             return (
+//               <ReviewDetails
+//                 key={i}
+//                 rating={review.rating}
+//                 id={review.id}
+//                 body={review.body}
+//                 reviewerName={review.reviewer}
+//                 createdAt={review.created_at}
+//                 deleteReview={() => props.deleteReview(review.id)}
+//               />
+//             );
+//           })
+//         : ""}
+//     </div>
+//   );
+// };
+// export default ReviewList;

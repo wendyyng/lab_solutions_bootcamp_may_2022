@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
       resources :users, only: [:create] do
         get :current, on: :collection
+      resources :reviews
       end
     end
   end
