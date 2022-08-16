@@ -1,0 +1,16 @@
+/* src/styles/main.css */
+html {
+    font-family: Helvetica, sans-serif;
+  }
+  
+  * {
+    font-family: inherit;
+  }
+  
+  img {
+    border-radius: 10px;
+  }
+
+  body {
+    background: gray;
+  }
