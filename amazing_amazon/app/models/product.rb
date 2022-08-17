@@ -1,9 +1,9 @@
 class Product < ApplicationRecord
   validates(:title,
-            presence: true,
+            presence: { message: "Title must be provided" },
             :uniqueness => { :case_sensitive => false })
   validates :price, numericality: { greater_than: 0 }
-  validates :description, presence: true, length: { minimum: 10 }
+  validates :description, presence: { message: "Title must be provided" }, length: { minimum: 10 }
   before_validation :set_default_price, :capitalize_title
   DEFAULT_PRICE = 1
   scope :search, ->(query) { where("title ILIKE ? OR  description ILIKE ?", "%#{query}%", "%#{query}%") }

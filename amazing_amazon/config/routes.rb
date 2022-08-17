@@ -32,12 +32,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :products
       resource :session, only: [:create, :destroy]
-      get("/current_user", to: "sessions#get_current_user")
-
       resources :users, only: [:create] do
         get :current, on: :collection
-      resources :reviews
+        resources :reviews
       end
     end
+    match "*unmatched_route", to: "application#not_found", via: :all
   end
 end
