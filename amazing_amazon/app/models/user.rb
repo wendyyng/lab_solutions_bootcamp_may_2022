@@ -18,7 +18,7 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}".strip.titleize
   end
 
-  def from_oauth?
+  def from_omniauth?
     uid.present? && provider.present?
   end
 
@@ -26,7 +26,7 @@ class User < ApplicationRecord
     name = oauth_data["info"]["name"]&.split || oauth_data["info"]["nickname"]
     self.create(
       first_name: name[0],
-      last_name: name[1],
+      last_name: name[1] || "",
       uid: oauth_data["uid"],
       provider: oauth_data["provider"],
       oauth_raw_data: oauth_data,

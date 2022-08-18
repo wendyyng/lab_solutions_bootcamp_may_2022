@@ -42,3 +42,7 @@ Rails.application.routes.draw do
     match "*unmatched_route", to: "application#not_found", via: :all
   end
 end
+
+def from_omniauth?
+  uid.present? && provider.present?
+end

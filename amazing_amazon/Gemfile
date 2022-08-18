@@ -45,6 +45,7 @@ gem "tzinfo-data"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+gem 'omniauth-twitter2'
 gem 'omniauth-twitter'
 gem 'omniauth', '~>1.9'
 gem "active_model_serializers"
