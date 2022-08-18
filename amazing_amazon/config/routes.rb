@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get "/contact_us" => "welcome#contact_us"
   get "/thank_you" => "welcome#thank_you"
   get "/new" => "bills#new"
+  get "/auth/twitter", as: :sign_in_with_twitter
+  get "/auth/:provider/callback" => "callbacks#index"
   match(
     "/delayed_job",
     to: DelayedJobWeb,

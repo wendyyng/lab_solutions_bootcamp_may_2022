@@ -20,7 +20,7 @@ const App = () => {
   };
 
   const onSignOut = () => {
-    this.setState({ user: null });
+    setUser(null);
   };
 
   useEffect(() => {
