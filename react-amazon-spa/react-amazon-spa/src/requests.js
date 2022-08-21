@@ -39,7 +39,8 @@ export const Product = {
 
 export const Review = {
   create(params, userId) {
-    return fetch(`${baseURL}/users/${userId}/reviews`, {  ///api/v1/users/:user_id/reviews
+    return fetch(`${baseURL}/users/${userId}/reviews`, {
+      ///api/v1/users/:user_id/reviews
       method: "POST",
       credentials: "include",
       headers: {
@@ -47,8 +48,8 @@ export const Review = {
       },
       body: JSON.stringify(params),
     }).then((res) => res.json());
-  }
-}
+  },
+};
 
 export const User = {
   current() {
@@ -79,6 +80,12 @@ export const Session = {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(params),
+    }).then((res) => res.json());
+  },
+  destroy() {
+    return fetch(`${baseURL}/session`, {
+      method: "DELETE",
+      credentials: "include",
     }).then((res) => res.json());
   },
 };

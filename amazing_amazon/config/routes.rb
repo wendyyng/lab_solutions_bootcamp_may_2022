@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get "/contact_us" => "welcome#contact_us"
   get "/thank_you" => "welcome#thank_you"
   get "/new" => "bills#new"
+  get "/auth/twitter", as: :sign_in_with_twitter
+  get "/auth/:provider/callback" => "callbacks#index"
   match(
     "/delayed_job",
     to: DelayedJobWeb,
@@ -32,12 +34,15 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :products
       resource :session, only: [:create, :destroy]
-      get("/current_user", to: "sessions#get_current_user")
-
       resources :users, only: [:create] do
         get :current, on: :collection
-      resources :reviews
+        resources :reviews
       end
     end
+    match "*unmatched_route", to: "application#not_found", via: :all
   end
+end
+
+def from_omniauth?
+  uid.present? && provider.present?
 end
