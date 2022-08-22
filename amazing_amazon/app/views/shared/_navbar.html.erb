@@ -7,6 +7,7 @@
 <%= link_to "About", about_path %> 
 <%= link_to "Contact Us", contact_us_path %> 
     <% if user_signed_in? %>
+      <%= link_to "Support us!", support_me_path %> 
       <span class='text-muted mr-3'>Hello, <%= current_user.full_name %></span>
       <%= button_to "Log Out", session_path, method: :delete, class: "btn btn-danger" %>
       <% if current_user.admin? %>

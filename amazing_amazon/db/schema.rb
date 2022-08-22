@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_18_202132) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_22_090356) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_18_202132) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "stripe_txn_id"
+    t.index ["user_id"], name: "index_donations_on_user_id"
   end
 
   create_table "favourites", force: :cascade do |t|
@@ -105,6 +114,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_18_202132) do
     t.string "oauth_token"
     t.string "oauth_secret"
     t.string "oauth_raw_data"
+    t.string "stripe_customer_id"
+    t.string "stripe_card_last4"
+    t.string "stripe_card_type"
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider"
   end
 
@@ -118,6 +130,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_18_202132) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "donations", "users"
   add_foreign_key "favourites", "products"
   add_foreign_key "favourites", "users"
   add_foreign_key "likes", "reviews"

@@ -223,3 +223,6 @@ $RECYCLE.BIN/
 
 #cache files
 cache/
+
+#secrets and stripes
+amazing_amazon/config/secrets.yml

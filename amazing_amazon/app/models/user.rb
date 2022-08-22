@@ -13,6 +13,7 @@ class User < ApplicationRecord
 
   has_many :favourites
   has_many :favourited_products, through: :favourites, source: :product
+  has_many :donations, dependent: :destroy
 
   def full_name
     "#{first_name} #{last_name}".strip.titleize
