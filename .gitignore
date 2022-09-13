@@ -62,7 +62,7 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
-
+.env
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -223,3 +223,6 @@ $RECYCLE.BIN/
 
 #cache files
 cache/
+
+#secrets and stripes
+amazing_amazon/config/secrets.yml
